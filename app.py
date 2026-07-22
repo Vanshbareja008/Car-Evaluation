@@ -98,11 +98,8 @@ Select the vehicle's specifications below to run the assessment.
 
 developer_info = """
 ### About the Developer
-**Created by:** Chandan Saroj
-
-* **LinkedIn:** [Connect with me](YOUR_LINKEDIN_URL_HERE)
-* **GitHub:** [Check out my projects](YOUR_GITHUB_URL_HERE)
-* **Instagram:** [Follow me](YOUR_INSTAGRAM_URL_HERE)
+**Created by:** Vansh
+Roll NO. 241047
 
 ---
 ### 🛠️ Tools & Technologies Used
