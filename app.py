@@ -1,155 +1,132 @@
-import gradio as gr
+import os
 import joblib
 import pandas as pd
+import gradio as gr
 
-# =====================================================
+# ==========================================================
 # Load Model
-# =====================================================
-try:
-    model = joblib.load("car_safety_model.pkl")
-except Exception as e:
-    model = None
-    print("Model Loading Error:", e)
+# ==========================================================
+model = joblib.load("car_safety_model.pkl")
 
-# =====================================================
+# ==========================================================
 # Prediction Function
-# =====================================================
+# ==========================================================
 def predict_car_safety(
-    buying_price,
-    maintenance_cost,
-    number_of_doors,
-    number_of_persons,
+    buying,
+    maintenance,
+    doors,
+    persons,
     lug_boot,
     safety
 ):
-    if model is None:
-        return "❌ Model not loaded.", ""
 
-    # Create dataframe with exact feature names
-    input_data = pd.DataFrame([{
-        "buying price": buying_price,
-        "maintenance cost": maintenance_cost,
-        "number of doors": number_of_doors,
-        "number of persons": number_of_persons,
+    # DataFrame with EXACT feature names used while training
+    data = pd.DataFrame([{
+        "buying price": buying,
+        "maintenance cost": maintenance,
+        "number of doors": doors,
+        "number of persons": persons,
         "lug_boot": lug_boot,
         "safety": safety
     }])
 
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(data)[0]
 
-    confidence = ""
-
-    if hasattr(model, "predict_proba"):
-        probs = model.predict_proba(input_data)[0]
-        confidence = f"Confidence : {max(probs)*100:.2f}%"
-
-    return str(prediction), confidence
+    try:
+        confidence = max(model.predict_proba(data)[0]) * 100
+        return f"Prediction : {prediction}\nConfidence : {confidence:.2f}%"
+    except:
+        return f"Prediction : {prediction}"
 
 
-# =====================================================
+# ==========================================================
 # Gradio Interface
-# =====================================================
-with gr.Blocks(theme=gr.themes.Soft()) as demo:
+# ==========================================================
 
-    gr.Markdown(
-        """
+title = """
 # 🚗 Car Safety Prediction System
 
-### Predict the Safety Category of a Car using Machine Learning
-
-**Developed by : Vansh**  
-**Roll No. : 241047**
-
----
+### Developed by **Vansh**
+### Roll No. **241047**
 """
-    )
 
-    with gr.Row():
+description = """
+Predict the **Safety Category** of a car based on its specifications.
 
-        buying_price = gr.Dropdown(
+### Example Values
+Buying Price : low
+
+Maintenance : low
+
+Doors : 4
+
+Persons : 4
+
+Luggage Boot : big
+
+Safety : high
+"""
+
+examples = [
+    ["low", "low", "4", "4", "big", "high"],
+    ["high", "high", "2", "2", "small", "low"],
+    ["med", "med", "4", "more", "med", "med"],
+    ["vhigh", "vhigh", "2", "2", "small", "low"]
+]
+
+demo = gr.Interface(
+    fn=predict_car_safety,
+
+    inputs=[
+        gr.Dropdown(
             ["low", "med", "high", "vhigh"],
-            label="Buying Price",
-            value="low"
-        )
+            label="Buying Price"
+        ),
 
-        maintenance_cost = gr.Dropdown(
+        gr.Dropdown(
             ["low", "med", "high", "vhigh"],
-            label="Maintenance Cost",
-            value="low"
-        )
+            label="Maintenance Cost"
+        ),
 
-    with gr.Row():
-
-        number_of_doors = gr.Dropdown(
+        gr.Dropdown(
             ["2", "3", "4", "5more"],
-            label="Number of Doors",
-            value="4"
-        )
+            label="Number of Doors"
+        ),
 
-        number_of_persons = gr.Dropdown(
+        gr.Dropdown(
             ["2", "4", "more"],
-            label="Capacity (Persons)",
-            value="4"
-        )
+            label="Number of Persons"
+        ),
 
-    with gr.Row():
-
-        lug_boot = gr.Dropdown(
+        gr.Dropdown(
             ["small", "med", "big"],
-            label="Luggage Boot Size",
-            value="med"
-        )
+            label="Luggage Boot Size"
+        ),
 
-        safety = gr.Dropdown(
+        gr.Dropdown(
             ["low", "med", "high"],
-            label="Safety",
-            value="high"
+            label="Safety"
         )
+    ],
 
-    predict_btn = gr.Button("🔍 Predict Safety", variant="primary")
+    outputs=gr.Textbox(label="Prediction"),
 
-    output = gr.Textbox(label="Prediction")
-    confidence = gr.Textbox(label="Model Confidence")
+    title=title,
 
-    predict_btn.click(
-        predict_car_safety,
-        inputs=[
-            buying_price,
-            maintenance_cost,
-            number_of_doors,
-            number_of_persons,
-            lug_boot,
-            safety
-        ],
-        outputs=[
-            output,
-            confidence
-        ]
-    )
+    description=description,
 
-    gr.Markdown(
-        """
-## 📌 Example Values
+    examples=examples,
 
-| Feature | Example |
-|---------|---------|
-| Buying Price | low |
-| Maintenance Cost | low |
-| Number of Doors | 4 |
-| Capacity | 4 |
-| Luggage Boot | med |
-| Safety | high |
+    theme=gr.themes.Soft()
+)
 
-Click **Predict Safety** to view the predicted class.
-"""
-    )
+# ==========================================================
+# Required for Render Deployment
+# ==========================================================
 
-# =====================================================
-# Launch
-# =====================================================
-import os
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 7860))
     demo.launch(
         server_name="0.0.0.0",
-        server_port=int(os.environ.get("PORT", 10000))
+        server_port=port
     )
