@@ -234,12 +234,7 @@ theme = gr.themes.Soft(
 
 
 
----
-### 🛠️ Tools & Technologies Used
-* **Machine Learning:** XGBoost Classifier
-* **Web Framework:** Gradio
-* **Language:** Python
-* **Deployment:** Render
+
 # --------------------------------------
 
 # ==========================================================
