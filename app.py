@@ -147,6 +147,7 @@ Click **Predict Safety** to view the predicted class.
 # =====================================================
 # Launch
 # =====================================================
+import os
 if __name__ == "__main__":
     demo.launch(
         server_name="0.0.0.0",
