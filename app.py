@@ -89,17 +89,150 @@ def predict_car_safety(
 # ==========================================================
 # --- CODE BLOCK: BRANDING & UI TEXT ---
 DESCRIPTION = """
-# 🚙 Car Safety & Evaluation System
+<div style="text-align:center;padding:15px;">
 
-This application evaluates a vehicle's overall acceptability based on its physical attributes, pricing, and safety metrics using a trained **XGBoost Machine Learning Model**.
+<h1 style="color:#2563EB;">
+🚗 AI Car Safety Evaluation Dashboard
+</h1>
 
-Select the vehicle's specifications below to run the assessment.
+<h3>
+Powered by <span style="color:#16A34A;">XGBoost Machine Learning</span>
+</h3>
+
+<p style="font-size:17px;">
+This intelligent dashboard evaluates a vehicle's overall
+<b>acceptability and safety level</b> using a trained
+Machine Learning model.
+</p>
+
+<hr>
+
+<h3>📋 Required Vehicle Specifications</h3>
+
+<table style="margin:auto;font-size:16px;">
+<tr>
+<td>💰 Buying Price</td>
+<td>🛠 Maintenance Cost</td>
+</tr>
+
+<tr>
+<td>🚪 Number of Doors</td>
+<td>👨‍👩‍👧 Passenger Capacity</td>
+</tr>
+
+<tr>
+<td>🧳 Luggage Boot Size</td>
+<td>🛡 Safety Rating</td>
+</tr>
+
+</table>
+
+<hr>
+
+<p style="color:gray;">
+Select all specifications and press
+<b>🚀 Evaluate Vehicle</b> to generate the prediction report.
+</p>
+
+</div>
+"""
+developer_info = """
+<hr>
+
+<div style="padding:20px;border-radius:12px;background:#F8FAFC;">
+
+<h2 align="center">👨‍💻 Developer Information</h2>
+
+<table style="width:100%;font-size:16px;">
+
+<tr>
+<td><b>Developer</b></td>
+<td>Vansh</td>
+</tr>
+
+<tr>
+<td><b>Roll Number</b></td>
+<td>241047</td>
+</tr>
+
+<tr>
+<td><b>Machine Learning Model</b></td>
+<td>XGBoost Classifier</td>
+</tr>
+
+<tr>
+<td><b>Programming Language</b></td>
+<td>Python</td>
+</tr>
+
+<tr>
+<td><b>Framework</b></td>
+<td>Gradio</td>
+</tr>
+
+<tr>
+<td><b>Deployment Platform</b></td>
+<td>Render Cloud</td>
+</tr>
+
+</table>
+
+<hr>
+
+<h3 align="center">🛠 Technology Stack</h3>
+
+<div align="center">
+
+Python • XGBoost • Joblib • Gradio • Render
+
+</div>
+
+<hr>
+
+<div align="center">
+
+<b>Version</b> 1.0.0
+
+<br>
+
+Designed for educational and machine learning demonstration purposes.
+
+</div>
+
+</div>
 """
 
-developer_info = """
-### About the Developer
-**Created by:** Vansh
-Roll NO. 241047
+theme = gr.themes.Soft(
+    primary_hue="blue",
+    secondary_hue="emerald",
+    neutral_hue="slate",
+).set(
+
+    body_background_fill="#EEF4FF",
+
+    block_background_fill="white",
+
+    block_border_color="#CBD5E1",
+
+    block_shadow="0px 4px 15px rgba(0,0,0,0.08)",
+
+    button_primary_background_fill="#2563EB",
+
+    button_primary_background_fill_hover="#1D4ED8",
+
+    button_primary_text_color="white",
+
+    input_background_fill="white",
+
+    input_border_color="#CBD5E1",
+
+    input_border_width="2px",
+
+    radius_size="10px",
+
+)
+
+
 
 ---
 ### 🛠️ Tools & Technologies Used
