@@ -240,7 +240,6 @@ theme = gr.themes.Soft(
 * **Web Framework:** Gradio
 * **Language:** Python
 * **Deployment:** Render
-"""
 # --------------------------------------
 
 # ==========================================================
