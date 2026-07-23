@@ -89,152 +89,25 @@ def predict_car_safety(
 # ==========================================================
 # --- CODE BLOCK: BRANDING & UI TEXT ---
 DESCRIPTION = """
-<div style="text-align:center;padding:15px;">
+# 🚙 Car Safety & Evaluation System
 
-<h1 style="color:#2563EB;">
-🚗 AI Car Safety Evaluation Dashboard
-</h1>
+This application evaluates a vehicle's overall acceptability based on its physical attributes, pricing, and safety metrics using a trained **XGBoost Machine Learning Model**.
 
-<h3>
-Powered by <span style="color:#16A34A;">XGBoost Machine Learning</span>
-</h3>
-
-<p style="font-size:17px;">
-This intelligent dashboard evaluates a vehicle's overall
-<b>acceptability and safety level</b> using a trained
-Machine Learning model.
-</p>
-
-<hr>
-
-<h3>📋 Required Vehicle Specifications</h3>
-
-<table style="margin:auto;font-size:16px;">
-<tr>
-<td>💰 Buying Price</td>
-<td>🛠 Maintenance Cost</td>
-</tr>
-
-<tr>
-<td>🚪 Number of Doors</td>
-<td>👨‍👩‍👧 Passenger Capacity</td>
-</tr>
-
-<tr>
-<td>🧳 Luggage Boot Size</td>
-<td>🛡 Safety Rating</td>
-</tr>
-
-</table>
-
-<hr>
-
-<p style="color:gray;">
-Select all specifications and press
-<b>🚀 Evaluate Vehicle</b> to generate the prediction report.
-</p>
-
-</div>
+Select the vehicle's specifications below to run the assessment.
 """
+
 developer_info = """
-<hr>
+### About the Developer
+**Created by:** Vansh Bareja
+Roll NO. - 241047
 
-<div style="padding:20px;border-radius:12px;background:#F8FAFC;">
-
-<h2 align="center">👨‍💻 Developer Information</h2>
-
-<table style="width:100%;font-size:16px;">
-
-<tr>
-<td><b>Developer</b></td>
-<td>Vansh</td>
-</tr>
-
-<tr>
-<td><b>Roll Number</b></td>
-<td>241047</td>
-</tr>
-
-<tr>
-<td><b>Machine Learning Model</b></td>
-<td>XGBoost Classifier</td>
-</tr>
-
-<tr>
-<td><b>Programming Language</b></td>
-<td>Python</td>
-</tr>
-
-<tr>
-<td><b>Framework</b></td>
-<td>Gradio</td>
-</tr>
-
-<tr>
-<td><b>Deployment Platform</b></td>
-<td>Render Cloud</td>
-</tr>
-
-</table>
-
-<hr>
-
-<h3 align="center">🛠 Technology Stack</h3>
-
-<div align="center">
-
-Python • XGBoost • Joblib • Gradio • Render
-
-</div>
-
-<hr>
-
-<div align="center">
-
-<b>Version</b> 1.0.0
-
-<br>
-
-Designed for educational and machine learning demonstration purposes.
-
-</div>
-
-</div>
+---
+### 🛠️ Tools & Technologies Used
+* **Machine Learning:** XGBoost Classifier
+* **Web Framework:** Gradio
+* **Language:** Python
+* **Deployment:** Render
 """
-
-theme = gr.themes.Soft(
-    primary_hue="blue",
-    secondary_hue="emerald",
-    neutral_hue="slate",
-).set(
-
-    body_background_fill="#EEF4FF",
-
-    block_background_fill="white",
-
-    block_border_color="#CBD5E1",
-
-    block_shadow="0px 4px 15px rgba(0,0,0,0.08)",
-
-    button_primary_background_fill="#2563EB",
-
-    button_primary_background_fill_hover="#1D4ED8",
-
-    button_primary_text_color="white",
-
-    input_background_fill="white",
-
-    input_border_color="#CBD5E1",
-
-    input_border_width="2px",
-
-    radius_size="10px",
-
-)
-
-
-
-
 # --------------------------------------
 
 # ==========================================================
@@ -244,36 +117,17 @@ theme = gr.themes.Soft(
 interface = gr.Interface(
     fn=predict_car_safety,
     inputs=[
-        gr.Dropdown(
-            choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)],
-            label="Buying Price"
-        ),
-        gr.Dropdown(
-            choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)],
-            label="Maintenance Cost"
-        ),
-        gr.Dropdown(
-            choices=[("2", 2), ("3", 3), ("4", 4), ("5 or More", 5)],
-            label="Number of Doors"
-        ),
-        gr.Dropdown(
-            choices=[("2", 2), ("4", 4), ("More", 5)],
-            label="Number of Persons"
-        ),
-        gr.Dropdown(
-            choices=[("Small", 0), ("Medium", 1), ("Big", 2)],
-            label="Luggage Boot Size"
-        ),
-        gr.Dropdown(
-            choices=[("Low", 0), ("Medium", 1), ("High", 2)],
-            label="Safety Rating"
-        ),
+        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)], label="Buying Price"),
+        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)], label="Maintenance Cost"),
+        gr.Dropdown(choices=[("2", 2), ("3", 3), ("4", 4), ("5 or More", 5)], label="Number of Doors"),
+        gr.Dropdown(choices=[("2", 2), ("4", 4), ("More", 5)], label="Number of Persons"),
+        gr.Dropdown(choices=[("Small", 0), ("Medium", 1), ("Big", 2)], label="Luggage Boot Size"),
+        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2)], label="Safety Rating"),
     ],
     outputs=gr.Textbox(label="Assessment Result", lines=4),
     title="🚙 Car Safety Evaluation System",
     description=DESCRIPTION,
-    article=developer_info,
-    theme=theme
+    article=developer_info
 )
 # ----------------------------------------
 
