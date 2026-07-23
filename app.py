@@ -99,7 +99,7 @@ Select the vehicle's specifications below to run the assessment.
 developer_info = """
 ### About the Developer
 **Created by:** Vansh Bareja
-Roll NO. - 241047
+**Roll NO.:** 241047
 
 ---
 ### 🛠️ Tools & Technologies Used
