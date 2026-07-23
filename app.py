@@ -242,6 +242,8 @@ theme = gr.themes.Soft(
 # ==========================================================
 # --- CODE BLOCK: SAFE DROPDOWN INPUTS ---
 interface = gr.Interface(
+     ...
+    theme=theme,
     fn=predict_car_safety,
     inputs=[
         gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)], label="Buying Price"),
