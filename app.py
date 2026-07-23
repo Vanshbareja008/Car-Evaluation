@@ -242,21 +242,38 @@ theme = gr.themes.Soft(
 # ==========================================================
 # --- CODE BLOCK: SAFE DROPDOWN INPUTS ---
 interface = gr.Interface(
-     ...
-    theme=theme,
     fn=predict_car_safety,
     inputs=[
-        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)], label="Buying Price"),
-        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)], label="Maintenance Cost"),
-        gr.Dropdown(choices=[("2", 2), ("3", 3), ("4", 4), ("5 or More", 5)], label="Number of Doors"),
-        gr.Dropdown(choices=[("2", 2), ("4", 4), ("More", 5)], label="Number of Persons"),
-        gr.Dropdown(choices=[("Small", 0), ("Medium", 1), ("Big", 2)], label="Luggage Boot Size"),
-        gr.Dropdown(choices=[("Low", 0), ("Medium", 1), ("High", 2)], label="Safety Rating"),
+        gr.Dropdown(
+            choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)],
+            label="Buying Price"
+        ),
+        gr.Dropdown(
+            choices=[("Low", 0), ("Medium", 1), ("High", 2), ("Very High", 3)],
+            label="Maintenance Cost"
+        ),
+        gr.Dropdown(
+            choices=[("2", 2), ("3", 3), ("4", 4), ("5 or More", 5)],
+            label="Number of Doors"
+        ),
+        gr.Dropdown(
+            choices=[("2", 2), ("4", 4), ("More", 5)],
+            label="Number of Persons"
+        ),
+        gr.Dropdown(
+            choices=[("Small", 0), ("Medium", 1), ("Big", 2)],
+            label="Luggage Boot Size"
+        ),
+        gr.Dropdown(
+            choices=[("Low", 0), ("Medium", 1), ("High", 2)],
+            label="Safety Rating"
+        ),
     ],
     outputs=gr.Textbox(label="Assessment Result", lines=4),
     title="🚙 Car Safety Evaluation System",
     description=DESCRIPTION,
-    article=developer_info
+    article=developer_info,
+    theme=theme
 )
 # ----------------------------------------
 
